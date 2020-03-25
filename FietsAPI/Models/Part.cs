@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,12 +10,15 @@ namespace FietsAPI.Models
     {
 
         #region properties
-
+        [Required]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
-        public string Beschrijving { get; set; }
+        public string Description { get; set; }
         public Functionality Functionality { get; set; }
-        public ICollection<Part> AfhankelijkeParts { get; set; }
+        public bool IsOptional { get; set; }
+        [Required]
+        public ICollection<Part> DependantParts { get; set; }
 
         #endregion
     }

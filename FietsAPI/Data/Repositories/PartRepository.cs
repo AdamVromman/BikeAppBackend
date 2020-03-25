@@ -20,17 +20,23 @@ namespace FietsAPI.Data.Repositories
 
         public IEnumerable<Part> GetAll()
         {
-            return _Parts.ToList();
+            return _Parts
+                .Include(p => p.DependantParts)
+                .ToList();
         }
 
         public IEnumerable<Part> GetByFunctionality(Functionality Functionality)
         {
-            return _Parts.Where(o => o.Functionality == Functionality).ToList();
+            return _Parts.Where(o => o.Functionality == Functionality)
+                .Include(p => p.DependantParts)
+                .ToList();
         }
 
         public Part GetById(int id)
         {
-            return _Parts.First(o => o.Id == id);
+            return _Parts
+                .Include(p => p.DependantParts)
+                .FirstOrDefault(o => o.Id == id);
         }
     }
 }

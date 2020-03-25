@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FietsAPI.Data;
+using FietsAPI.Data.Repositories;
+using FietsAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace FietsAPI
 {
@@ -26,11 +24,28 @@ namespace FietsAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("FietsContext")));
+            services.AddScoped<BikeDataInitializer>();
+            services.AddOpenApiDocument(c => 
+            { 
+                c.DocumentName = "apidocs"; 
+                c.Title = "BikeAPI"; 
+                c.Version = "v1"; 
+                c.Description = "The BikeAPI documentation."; 
+            }
+            );
+
             services.AddSwaggerDocument();
+            services.AddScoped<IPartRepository, PartRepository>();
+            services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin())); 
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BikeDataInitializer bikeDataInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -50,6 +65,8 @@ namespace FietsAPI
             {
                 endpoints.MapControllers();
             });
+            app.UseCors("AllowAllOrigins");
+            bikeDataInitializer.InitializeData();
         }
     }
 }
