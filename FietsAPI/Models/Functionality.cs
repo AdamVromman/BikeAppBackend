@@ -10,7 +10,8 @@ namespace FietsAPI.Models
 
         Aandrijving,
         Remmen,
-        Sturen
+        Sturen,
+        Varia
 
     }
 }

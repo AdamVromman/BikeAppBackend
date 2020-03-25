@@ -7,7 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace FietsAPI
 {
@@ -28,6 +29,24 @@ namespace FietsAPI
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("FietsContext")));
             services.AddScoped<BikeDataInitializer>();
+            services.AddScoped<IPartRepository, PartRepository>();
+            services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 10;
+                options.Password.RequireUppercase = true;
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+
+
+            }
+            );
             services.AddOpenApiDocument(c => 
             { 
                 c.DocumentName = "apidocs"; 
@@ -38,7 +57,6 @@ namespace FietsAPI
             );
 
             services.AddSwaggerDocument();
-            services.AddScoped<IPartRepository, PartRepository>();
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin())); 
 
 
@@ -66,7 +84,7 @@ namespace FietsAPI
                 endpoints.MapControllers();
             });
             app.UseCors("AllowAllOrigins");
-            bikeDataInitializer.InitializeData();
+            bikeDataInitializer.InitializeData().Wait();
         }
     }
 }

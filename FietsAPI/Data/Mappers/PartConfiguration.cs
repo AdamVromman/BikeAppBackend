@@ -12,7 +12,13 @@ namespace FietsAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Part> builder)
         {
-           
+            builder.ToTable("Part");
+            
+            builder.HasKey(b => b.Id);
+            builder.Property(b => b.Name).IsRequired().HasMaxLength(32);
+            builder.Property(b => b.Description).HasMaxLength(512);
+
+            builder.HasMany(b => b.DependantParts).WithOne().OnDelete(DeleteBehavior.Restrict);     
         }
     }
 }
