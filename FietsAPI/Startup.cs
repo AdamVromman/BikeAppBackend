@@ -12,6 +12,9 @@ using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Linq;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 
 namespace FietsAPI
 {
@@ -41,6 +44,9 @@ namespace FietsAPI
             {
                 options.Password.RequiredLength = 10;
                 options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
 
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
@@ -77,7 +83,15 @@ namespace FietsAPI
                 c.DocumentName = "apidocs"; 
                 c.Title = "BikeAPI"; 
                 c.Version = "v1"; 
-                c.Description = "The BikeAPI documentation."; 
+                c.Description = "The BikeAPI documentation.";
+                c.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                {
+                    Type = OpenApiSecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    In = OpenApiSecurityApiKeyLocation.Header,
+                    Description = "Type into the textbox: Bearer {your JWT token}"
+                }) ;
+                c.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
             }
             );
 

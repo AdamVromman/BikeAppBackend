@@ -29,9 +29,9 @@ namespace FietsAPI.Data.Repositories
             return _bUsers.OrderBy(u => u.LastName).ToList();
         }
 
-        public BUser GetById(int id)
+        public BUser GetByEmail(string email)
         {
-            return _bUsers.FirstOrDefault(u => u.Id == id);
+            return _bUsers.FirstOrDefault(u => u.Email.ToLower().Equals(email.ToLower()));
         }
 
         public void SaveChanges()

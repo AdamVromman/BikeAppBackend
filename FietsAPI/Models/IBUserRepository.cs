@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace FietsAPI.Models
 {
-    interface IBUserRepository
+    public interface IBUserRepository
     {
 
         public IEnumerable<BUser> GetAll();
-        public BUser GetById(int id);
+        public BUser GetByEmail(string email);
         public void Add(BUser user);
         public void SaveChanges();
         

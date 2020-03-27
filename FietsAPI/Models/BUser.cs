@@ -10,7 +10,7 @@ namespace FietsAPI.Models
 
         #region properties
 
-        public int Id { get; }
+       
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Email { get; set; }

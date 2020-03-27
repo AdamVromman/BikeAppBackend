@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FietsAPI.Data.Mappers
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<BUser>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<BUser> builder)
         {
             builder.ToTable("User");
             builder.HasKey(b => b.Email);

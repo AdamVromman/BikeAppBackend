@@ -21,7 +21,7 @@ namespace FietsAPI.Data
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new PartConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
-            
+            builder.ApplyConfiguration(new BikeConfiguration());
         }
 
 
