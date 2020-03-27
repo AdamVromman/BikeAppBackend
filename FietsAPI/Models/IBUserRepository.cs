@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace FietsAPI.Models
 {
-    interface IUserRepository
+    interface IBUserRepository
     {
 
-        public IEnumerable<User> GetAll();
-        public User GetById();
-        public void Add(User user);
+        public IEnumerable<BUser> GetAll();
+        public BUser GetById(int id);
+        public void Add(BUser user);
         public void SaveChanges();
         
 

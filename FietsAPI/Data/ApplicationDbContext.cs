@@ -9,7 +9,8 @@ namespace FietsAPI.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Part> Parts { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<BUser> BUsers { get; set; }
+        public DbSet<Bike> Bikes { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

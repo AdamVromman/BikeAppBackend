@@ -9,6 +9,7 @@ namespace FietsAPI.Models
     {
         #region properties
 
+        public int Id { get; }
         public string Name { get; set; }
         public string Type { get; set; }
         public ICollection<Part> Parts { get; set; }

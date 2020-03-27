@@ -18,6 +18,11 @@ namespace FietsAPI.Data.Repositories
             _Parts = _applicationDbContext.Parts;
         }
 
+        public void AddPart(Part part)
+        {
+            _Parts.Add(part);
+        }
+
         public IEnumerable<Part> GetAll()
         {
             return _Parts
@@ -37,6 +42,11 @@ namespace FietsAPI.Data.Repositories
             return _Parts
                 .Include(p => p.DependantParts)
                 .FirstOrDefault(o => o.Id == id);
+        }
+
+        public void SaveChanges()
+        {
+            _applicationDbContext.SaveChanges();
         }
     }
 }

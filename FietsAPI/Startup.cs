@@ -9,6 +9,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace FietsAPI
 {
@@ -30,6 +33,8 @@ namespace FietsAPI
             options.UseSqlServer(Configuration.GetConnectionString("FietsContext")));
             services.AddScoped<BikeDataInitializer>();
             services.AddScoped<IPartRepository, PartRepository>();
+            services.AddScoped<IBikeRepository, BikeRepository>();
+            services.AddScoped<IBUserRepository, BUserRepository>();
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<IdentityOptions>(options =>
@@ -47,6 +52,26 @@ namespace FietsAPI
 
             }
             );
+
+            services.AddAuthentication(a =>
+            {
+                a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            } )
+                .AddJwtBearer(a =>
+                {
+                    a.RequireHttpsMetadata = false;
+                    a.SaveToken = true;
+                    a.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        RequireExpirationTime = true
+
+                    };
+                });
+
             services.AddOpenApiDocument(c => 
             { 
                 c.DocumentName = "apidocs"; 
@@ -78,6 +103,8 @@ namespace FietsAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
