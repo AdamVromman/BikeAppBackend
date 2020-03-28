@@ -11,6 +11,7 @@ namespace FietsAPI.Data
         public DbSet<Part> Parts { get; set; }
         public DbSet<BUser> BUsers { get; set; }
         public DbSet<Bike> Bikes { get; set; }
+        public DbSet<PartsRelation> PartsRelations {get;set;}
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -22,6 +23,7 @@ namespace FietsAPI.Data
             builder.ApplyConfiguration(new PartConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new BikeConfiguration());
+            builder.ApplyConfiguration(new PartsRelationConfiguration());
         }
 
 

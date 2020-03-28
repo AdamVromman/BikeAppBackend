@@ -17,8 +17,9 @@ namespace FietsAPI.Models
         public string Description { get; set; }
         public Functionality Functionality { get; set; }
         public bool IsOptional { get; set; }
-        [Required]
-        public ICollection<Part> DependantParts { get; set; }
+        
+        public ICollection<PartsRelation> DependantParts { get; set; }
+        public ICollection<PartsRelation> DominantParts { get; set; }
 
         #endregion
     }

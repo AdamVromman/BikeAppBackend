@@ -27,6 +27,7 @@ namespace FietsAPI.Data.Repositories
         {
             return _Parts
                 .Include(p => p.DependantParts)
+                .Include(p => p.DominantParts)
                 .ToList();
         }
 
@@ -34,6 +35,7 @@ namespace FietsAPI.Data.Repositories
         {
             return _Parts.Where(o => o.Functionality == Functionality)
                 .Include(p => p.DependantParts)
+                .Include(p => p.DominantParts)
                 .ToList();
         }
 
@@ -41,6 +43,7 @@ namespace FietsAPI.Data.Repositories
         {
             return _Parts
                 .Include(p => p.DependantParts)
+                .Include(p => p.DominantParts)
                 .FirstOrDefault(o => o.Id == id);
         }
 
