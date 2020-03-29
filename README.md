@@ -1,6 +1,6 @@
 
 Requirements backend Web IV
--[x] De GIT repo voor de backend is aangemaakt
+- [x] De GIT repo voor de backend is aangemaakt
 
 de readme
 [x] Printscreen van de API zoals weergegeven in swagger. Per endpoint een printscreen van de parameters en de responses
