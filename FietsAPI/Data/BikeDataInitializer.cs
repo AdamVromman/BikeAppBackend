@@ -338,7 +338,42 @@ namespace FietsAPI.Data
                 BUser mao = new BUser { Email = "Mao.Zedong@hogent.be", FirstName = "Mao", LastName = "Zedong" };
                 _applicationDbContext.BUsers.Add(mao);
                 await CreateUser(mao.Email, "Zedong1");
-                
+
+                #endregion
+
+                #region AddedParts
+
+                AddedPart part1 = new AddedPart
+                {
+                    Name = "Eltin Moderate Pro Zadel",
+                    Brand = "Eltin",
+                    BUser = putin,
+                    Part = Zadel,
+                    Price = 14.50m
+                };
+
+                AddedPart part2 = new AddedPart
+                {
+                    Name = "Mighty crankset 165mm 48T",
+                    Brand = "Mighty",
+                    BUser = mao,
+                    Part = CrankSet,
+                    Price = 29.90m
+                };
+
+                AddedPart part3 = new AddedPart
+                {
+                    Name = "Open U.P.P.E.R gravel frame",
+                    Brand = "OPEN",
+                    BUser = mao,
+                    Part = Kader,
+                    Price = 4500.00m
+                    
+                };
+
+                _applicationDbContext.AddedParts.AddRange(new List<AddedPart> { part1, part2, part3 });
+
+
                 #endregion
 
                 _applicationDbContext.SaveChanges();

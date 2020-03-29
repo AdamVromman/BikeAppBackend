@@ -37,9 +37,10 @@ namespace FietsAPI.Controllers
                     {
                         PartDTO part = new PartDTO
                         {
-                            Naam = p.Name,
-                            Beschrijving = p.Description,
-                            Functionaliteit = p.Functionality,
+                            Id = p.Id,
+                            Name = p.Name,
+                            Description = p.Description,
+                            Functionality = p.Functionality.ToString(),
                             IsOptional = p.IsOptional,
                             DominantParts = p.DominantParts.Select(dp => dp.DominantPart.Name).ToList(),
                             DependantParts = p.DependantParts.Select(dp => dp.DependantPart.Name).ToList()
