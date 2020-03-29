@@ -15,8 +15,8 @@ namespace FietsAPI.Data.Mappers
             builder.ToTable("PartsRelation");
             builder.HasKey(b => new { b.DomId, b.DepId });
 
-            builder.HasOne(b => b.DependantPart).WithMany(b => b.DependantParts).OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(b => b.DominantPart).WithMany(b => b.DominantParts).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(b => b.DependantPart).WithMany(b => b.DominantParts).HasForeignKey(b => b.DepId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(b => b.DominantPart).WithMany(b => b.DependantParts).HasForeignKey(b => b.DomId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

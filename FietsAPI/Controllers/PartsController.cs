@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FietsAPI.Models;
+using FietsAPI.Models.DTO;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -29,9 +30,20 @@ namespace FietsAPI.Controllers
         /// </summary>
         /// <returns>een lijst van alle Parts</returns>
         [HttpGet]
-        public IEnumerable<Part> GetParts()
+        public IEnumerable<PartDTO> GetParts()
         {
-            return _partRepository.GetAll();
+            return _partRepository.GetAll().Select(p =>
+            {
+                return new PartDTO
+                {
+                    Naam = p.Name,
+                    Beschrijving = p.Description,
+                    Functionaliteit = p.Functionality,
+                    IsOptional = p.IsOptional,
+                    DominantParts = p.DominantParts.Select(dp => dp.DominantPart.Name).ToList(),
+                    DependantParts = p.DependantParts.Select(dp => dp.DependantPart.Name).ToList()
+                };
+            });
         }
         /// <summary>
         /// geeft één Part terug, aan de hand van Id

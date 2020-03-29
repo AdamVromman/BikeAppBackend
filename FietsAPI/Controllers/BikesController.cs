@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FietsAPI.Models;
+using FietsAPI.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,12 +21,36 @@ namespace FietsAPI.Controllers
         public BikesController(IBikeRepository bikeRepository)
         {
             _bikeRepository = bikeRepository;
+           
         }
 
         [HttpGet]
-        public IEnumerable<Bike> GetBikes()
+        public IEnumerable<BikeDTO> GetBikes()
         {
-            return _bikeRepository.GetAll();
+            return _bikeRepository.GetAll().Select(b =>
+            {
+                return new BikeDTO
+                {
+                    Name = b.Name,
+                    Type = b.Type,
+                    Parts = b.Parts.Select(p =>
+                    {
+                        PartDTO part = new PartDTO
+                        {
+                            Naam = p.Name,
+                            Beschrijving = p.Description,
+                            Functionaliteit = p.Functionality,
+                            IsOptional = p.IsOptional,
+                            DominantParts = p.DominantParts.Select(dp => dp.DominantPart.Name).ToList(),
+                            DependantParts = p.DependantParts.Select(dp => dp.DependantPart.Name).ToList()
+                        };
+                       
+                        return part;
+                    }).ToList()
+                };
+                
+                
+            }).ToList();
         }
 
     }

@@ -16,7 +16,8 @@ namespace FietsAPI.Data.Mappers
             builder.HasKey(b => b.Id);
             builder.Property(b => b.Name).IsRequired().HasMaxLength(16);
             builder.Property(b => b.Type).HasMaxLength(32);
-            builder.HasMany(b => b.Parts);
+            
+            builder.HasMany(b => b.Parts).WithOne().HasForeignKey(p => p.BikeId);
         }
     }
 }

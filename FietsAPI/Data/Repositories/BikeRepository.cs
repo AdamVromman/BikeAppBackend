@@ -22,6 +22,9 @@ namespace FietsAPI.Data.Repositories
         {
             return _bikes.OrderBy(b => b.Name)
                 .Include(b => b.Parts)
+                .ThenInclude(b => b.DominantParts)
+                .Include(b => b.Parts)
+                .ThenInclude(p => p.DependantParts)
                 .ToList();
         }
 

@@ -17,7 +17,8 @@ namespace FietsAPI.Models
         public string Description { get; set; }
         public Functionality Functionality { get; set; }
         public bool IsOptional { get; set; }
-        
+        public int BikeId { get; set; }
+
         public ICollection<PartsRelation> DependantParts { get; set; }
         public ICollection<PartsRelation> DominantParts { get; set; }
 
