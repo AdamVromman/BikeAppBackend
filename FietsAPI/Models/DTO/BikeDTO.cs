@@ -7,6 +7,7 @@ namespace FietsAPI.Models.DTO
 {
     public class BikeDTO
     {
+        public int Id { get; set; }
         public String Name { get; set; }
         public String Type { get; set; }
         public ICollection<PartDTO> Parts { get; set; }

@@ -327,17 +327,179 @@ namespace FietsAPI.Data
                 #endregion
 
                 #region bikes
-                Bike fixie = new Bike { Name = "Fixie", Type = "Single-speed track", Parts = parts };
+                Bike fixie = new Bike { Name = "Fixie", Type = "Single-speed track"};
                 _applicationDbContext.Bikes.Add(fixie);
+                #endregion
+
+                #region bikeParts
+
+                BikePart bikePart1 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = Kader,
+                    PartId = Kader.Id
+
+                };
+
+                BikePart bikePart2 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = Voorvork,
+                    PartId = Voorvork.Id
+
+                };
+
+                BikePart bikePart3 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = BottomBracket,
+                    PartId = BottomBracket.Id
+
+                };
+
+                BikePart bikePart4 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = Achterwiel,
+                    PartId = Achterwiel.Id
+
+                };
+
+                BikePart bikePart5 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = Zadelpen,
+                    PartId = Zadelpen.Id
+
+                };
+
+                BikePart bikePart6 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = Zadel,
+                    PartId = Zadel.Id
+
+                };
+
+                BikePart bikePart7 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = stuurpen,
+                    PartId = stuurpen.Id
+
+                };
+
+                BikePart bikePart8 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = Stuur,
+                    PartId = Stuur.Id
+
+                };
+
+                BikePart bikePart9 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = Voorwiel,
+                    PartId = Voorwiel.Id
+
+                };
+
+                BikePart bikePart10 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = BinnenBand,
+                    PartId = BinnenBand.Id
+
+                };
+
+                BikePart bikePart11 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = Bel,
+                    PartId = Bel.Id
+
+                };
+
+                BikePart bikePart12 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = achterTandWiel,
+                    PartId = achterTandWiel.Id
+
+                };
+
+                BikePart bikePart13 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = BuitenBand,
+                    PartId = BuitenBand.Id
+
+                };
+
+                BikePart bikePart14 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = CrankSet,
+                    PartId = CrankSet.Id
+
+                };
+
+                BikePart bikePart15 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = ketting,
+                    PartId = ketting.Id
+
+                };
+
+                BikePart bikePart16 = new BikePart
+                {
+                    Bike = fixie,
+                    BikeId = fixie.Id,
+                    Part = pedalen,
+                    PartId = pedalen.Id
+
+                };
+
+                ICollection<BikePart> bikeparts = new List<BikePart>() { 
+                    bikePart1, bikePart2, bikePart3, 
+                    bikePart4, bikePart5, bikePart6, 
+                    bikePart7, bikePart8, bikePart9,
+                    bikePart10, bikePart11, bikePart12,
+                    bikePart13, bikePart14, bikePart15,
+                    bikePart16, };
+
+                _applicationDbContext.BikeParts.AddRange(bikeparts);
+                _applicationDbContext.SaveChanges();
+
                 #endregion
 
                 #region users
                 BUser putin = new BUser { Email = "Vladimir.Putin@hogent.be", FirstName = "Vladimir", LastName = "Putin" };
                 _applicationDbContext.BUsers.Add(putin);
-                await CreateUser(putin.Email, "Putin1");
+                await CreateUser(putin.Email, "VladimirPutin1Password");
+                _userManager.FindByNameAsync(putin.Email).Result.EmailConfirmed = true;
+                
                 BUser mao = new BUser { Email = "Mao.Zedong@hogent.be", FirstName = "Mao", LastName = "Zedong" };
                 _applicationDbContext.BUsers.Add(mao);
-                await CreateUser(mao.Email, "Zedong1");
+                await CreateUser(mao.Email, "MaoZedong1Password");
+                _userManager.FindByNameAsync(mao.Email).Result.EmailConfirmed = true;
 
                 #endregion
 

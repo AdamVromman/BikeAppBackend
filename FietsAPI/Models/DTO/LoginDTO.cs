@@ -9,7 +9,7 @@ namespace FietsAPI.Models.DTO
     public class LoginDTO
     {
         [Required]
-        [EmailAddress]
+       
         public String Email { get; set; }
         [Required]
         public String Password { get; set; }

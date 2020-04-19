@@ -36,12 +36,14 @@ namespace FietsAPI.Controllers
             {
                 return new PartDTO
                 {
+                    Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
                     Functionality = p.Functionality.ToString(),
                     IsOptional = p.IsOptional,
                     DominantParts = p.DominantParts.Select(dp => dp.DominantPart.Name).ToList(),
-                    DependantParts = p.DependantParts.Select(dp => dp.DependantPart.Name).ToList()
+                    DependantParts = p.DependantParts.Select(dp => dp.DependantPart.Name).ToList(),
+                    BikeId = p.BikeParts.Select(b => b.BikeId).ToList()
                 };
             });
         }

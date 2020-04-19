@@ -12,7 +12,7 @@ namespace FietsAPI.Models
         public int Id { get; }
         public string Name { get; set; }
         public string Type { get; set; }
-        public ICollection<Part> Parts { get; set; }
+        public ICollection<BikePart> Parts { get; set; }
 
         #endregion
     }

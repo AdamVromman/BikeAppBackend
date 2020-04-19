@@ -31,19 +31,21 @@ namespace FietsAPI.Controllers
             {
                 return new BikeDTO
                 {
+                    Id = b.Id,
                     Name = b.Name,
                     Type = b.Type,
                     Parts = b.Parts.Select(p =>
                     {
                         PartDTO part = new PartDTO
                         {
-                            Id = p.Id,
-                            Name = p.Name,
-                            Description = p.Description,
-                            Functionality = p.Functionality.ToString(),
-                            IsOptional = p.IsOptional,
-                            DominantParts = p.DominantParts.Select(dp => dp.DominantPart.Name).ToList(),
-                            DependantParts = p.DependantParts.Select(dp => dp.DependantPart.Name).ToList()
+                            Id = p.Part.Id,
+                            Name = p.Part.Name,
+                            Description = p.Part.Description,
+                            Functionality = p.Part.Functionality.ToString(),
+                            IsOptional = p.Part.IsOptional,
+                            DominantParts = p.Part.DominantParts.Select(dp => dp.DominantPart.Name).ToList(),
+                            DependantParts = p.Part.DependantParts.Select(dp => dp.DependantPart.Name).ToList(),
+                            BikeId = p.Part.BikeParts.Select(b => b.BikeId).ToList()
                         };
                        
                         return part;

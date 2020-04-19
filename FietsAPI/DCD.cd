@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FietsAPI.Data.Repositories.AddedPartRepository" BaseTypeListCollapsed="true">
+    <Position X="29.75" Y="11.75" Width="1.5" />
+    <AssociationLine Name="_dbContext" Type="FietsAPI.Data.ApplicationDbContext" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="31.25" Y="14.298" />
+        <Point X="31.625" Y="14.298" />
+        <Point X="31.625" Y="15.562" />
+        <Point X="32.75" Y="15.562" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gAABAAAACAAAAAAAgAAAAAAAAAAQAAAAAwAAAAAAAIA=</HashCode>
+      <FileName>Data\Repositories\AddedPartRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_dbContext" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FietsAPI.Data.Repositories.BikeRepository" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQABAAAAAAAAAAAAAAAAAAAAgAACAAAAIA=</HashCode>
+      <FileName>Data\Repositories\BikeRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FietsAPI.Data.Repositories.BUserRepository" BaseTypeListCollapsed="true">
+    <Position X="33.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIAAAAAAAAABAAAAAAAAAAAAACQAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Data\Repositories\BUserRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FietsAPI.Data.Repositories.PartRepository" BaseTypeListCollapsed="true">
+    <Position X="35.75" Y="11.75" Width="1.5" />
+    <AssociationLine Name="_applicationDbContext" Type="FietsAPI.Data.ApplicationDbContext" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="36.5" Y="14.267" />
+        <Point X="36.5" Y="15.562" />
+        <Point X="34.25" Y="15.562" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAwAAAAgACIA=</HashCode>
+      <FileName>Data\Repositories\PartRepository.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_applicationDbContext" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FietsAPI.Data.ApplicationDbContext">
+    <Position X="32.75" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAABAAAEgAEAAAAAAAAAAAAAgBAAA=</HashCode>
+      <FileName>Data\ApplicationDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FietsAPI.Data.BikeDataInitializer">
+    <Position X="32.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAQEAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Data\BikeDataInitializer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_applicationDbContext" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FietsAPI.Models.DTO.BikeDTO">
+    <Position X="21" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAABAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\BikeDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FietsAPI.Models.DTO.LoginDTO">
+    <Position X="22.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\LoginDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FietsAPI.Models.DTO.PartDTO">
+    <Position X="21" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQCAAAAAgAAAAIAIAAAQAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Models\DTO\PartDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FietsAPI.Models.DTO.registerDTO">
+    <Position X="22.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\DTO\registerDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FietsAPI.Models.AddedPart">
+    <Position X="27.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAASAAAAIQAAAAAAAAAAAAQAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\AddedPart.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="BUser" />
+      <Property Name="Part" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FietsAPI.Models.Bike">
+    <Position X="25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAABAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Bike.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Parts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="FietsAPI.Models.BikePart">
+    <Position X="25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAQAAAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\BikePart.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Bike" />
+      <Property Name="Part" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FietsAPI.Models.BUser">
+    <Position X="27.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\BUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FietsAPI.Models.Part">
+    <Position X="27.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQCAAAAAgAAAAAAIAAAQAAAAAAAAAIAAAAAABAAA=</HashCode>
+      <FileName>Models\Part.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="DominantParts" />
+      <Property Name="DependantParts" />
+      <Property Name="BikeParts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="FietsAPI.Models.PartsRelation">
+    <Position X="27.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAACAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\PartsRelation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DominantPart" />
+      <Property Name="DependantPart" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FietsAPI.Controllers.AccountController">
+    <Position X="33.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABQEAAAAAAAAAAABAAAAAAAABAAAAAAEAAAEAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_bUserRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FietsAPI.Controllers.AddedPartsController">
+    <Position X="29.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAACAAQAAAAkAAAA=</HashCode>
+      <FileName>Controllers\AddedPartsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_addedPartRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FietsAPI.Controllers.BikesController">
+    <Position X="31.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\BikesController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_bikeRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FietsAPI.Controllers.PartsController">
+    <Position X="35.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAAIA=</HashCode>
+      <FileName>Controllers\PartsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_partRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="FietsAPI.Models.IAddedPartRepository">
+    <Position X="29.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAACAAAAAAAAAAAAAAAAAAQAAAAAwAAAAAAAIA=</HashCode>
+      <FileName>Models\IAddedPartRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FietsAPI.Models.IBikeRepository">
+    <Position X="31.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>Models\IBikeRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FietsAPI.Models.IBUserRepository">
+    <Position X="33.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIAAAAAAAAAAAAAAAAAAAAAAACAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\IBUserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FietsAPI.Models.IPartRepository">
+    <Position X="35.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAgAAIA=</HashCode>
+      <FileName>Models\IPartRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="FietsAPI.Models.Functionality">
+    <Position X="25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAQAAAAA=</HashCode>
+      <FileName>Models\Functionality.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

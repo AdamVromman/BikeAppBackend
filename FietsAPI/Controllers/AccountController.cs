@@ -33,7 +33,7 @@ namespace FietsAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<String>> CreateToken(LoginDTO model)
+        public async Task<ActionResult<String>> CreateToken([FromBody]LoginDTO model)
         {
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user != null)
@@ -42,7 +42,7 @@ namespace FietsAPI.Controllers
                 if (result.Succeeded)
                 {
                     string token = GetToken(user);
-                    return Created("", token);
+                    return Created("", new { Token = token});
                 }
             }
             return BadRequest();

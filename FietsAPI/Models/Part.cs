@@ -21,6 +21,7 @@ namespace FietsAPI.Models
 
         public ICollection<PartsRelation> DependantParts { get; set; }
         public ICollection<PartsRelation> DominantParts { get; set; }
+        public ICollection<BikePart> BikeParts { get; set; }
 
         #endregion
     }

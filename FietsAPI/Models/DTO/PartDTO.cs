@@ -15,6 +15,8 @@ namespace FietsAPI.Models.DTO
         public Boolean IsOptional { get; set; }
         public ICollection<String> DependantParts { get; set; }
         public ICollection<String> DominantParts { get; set; }
+        public ICollection<int> BikeId { get; set; }
+
 
     }
 }

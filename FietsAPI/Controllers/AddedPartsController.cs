@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FietsAPI.Models;
+using FietsAPI.Models.DTO;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -27,41 +28,56 @@ namespace FietsAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<AddedPart> GetAddedParts()
+        public IEnumerable<addedPartDTO> GetAddedParts()
         {
-            return _addedPartRepository.GetAll();
+            return _addedPartRepository.GetAll().Select(ap =>
+            {
+                return new addedPartDTO
+                {
+                    name = ap.Name,
+                    brand = ap.Brand,
+                    price = ap.Price,
+                    email = ap.BUser.Email,
+                    link = ap.Link,
+                    partId = ap.Part.Id
+
+                };
+            }
+            );
         }
 
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public ActionResult<string> AddAddedPart(string name, string brand, Decimal price, int partId, string bUserEmail)
+        public ActionResult<string> AddAddedPart([FromBody]addedPartDTO addedPartDTO)
         {
-            AddedPart addedPart = null;
+            
             try
             {
-                BUser user = _bUserRepository.GetByEmail(bUserEmail);
-                Part part = _partRepository.GetById(partId);
+                BUser user = _bUserRepository.GetByEmail(addedPartDTO.email);
+                Part part = _partRepository.GetById(addedPartDTO.partId);
 
                 if (user != null && part != null)
                 {
-                     addedPart = new AddedPart
+                    _addedPartRepository.AddAddedPart(new AddedPart 
                     {
-                        Name = name,
-                        Brand = brand,
-                        Price = price,
+                        Name = addedPartDTO.name,
+                        Brand = addedPartDTO.brand,
+                        Price = addedPartDTO.price,
+                        BUser = user,
                         Part = part,
-                        BUser = user
-                    };
-                        
-                    _addedPartRepository.AddAddedPart(addedPart);
-                        
+                        Link = addedPartDTO.link
+                    });
+                    _addedPartRepository.SaveChanges();
+                    return Ok(addedPartDTO.name);
                 }
+                return NotFound("This email address isn't know");
+
             }
             catch(Exception e)
             {
                 return NotFound(e.Message);
             }
-            return Ok(addedPart.Name);
+            
         }
 
 

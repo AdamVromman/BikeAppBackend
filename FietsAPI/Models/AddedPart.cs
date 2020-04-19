@@ -9,11 +9,12 @@ namespace FietsAPI.Models
     {
 
         public int Id { get; }
-        public String Name { get; set; }
-        public String Brand { get; set; }
+        public string Name { get; set; }
+        public string Brand { get; set; }
         public Part Part { get; set; }
-        public Decimal Price { get; set; }
+        public decimal Price { get; set; }
         public BUser BUser { get; set; }
+        public string Link { get; set; }
 
     }
 }
