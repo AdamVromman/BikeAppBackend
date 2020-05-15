@@ -39,6 +39,7 @@ namespace FietsAPI
             services.AddScoped<IBikeRepository, BikeRepository>();
             services.AddScoped<IBUserRepository, BUserRepository>();
             services.AddScoped<IAddedPartRepository, AddedPartRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<IdentityOptions>(options =>

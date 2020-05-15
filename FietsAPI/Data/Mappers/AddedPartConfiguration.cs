@@ -15,11 +15,13 @@ namespace FietsAPI.Data.Mappers
             builder.ToTable("AddedPart");
             builder.HasKey(b => b.Id);
             builder.Property(b => b.Name).IsRequired().HasMaxLength(64);
-            builder.Property(b => b.Price);
+            builder.Property(b => b.Price).HasColumnType("decimal(38,2)");
             builder.Property(b => b.Brand).IsRequired(false);
 
             builder.HasOne(b => b.Part);
             builder.HasOne(b => b.BUser);
+            builder.HasOne(b => b.Image).WithOne(i => i.Part).HasForeignKey<Image>(b => b.PartId);
+            
         }
     }
 }

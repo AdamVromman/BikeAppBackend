@@ -15,6 +15,7 @@ namespace FietsAPI.Models
         public decimal Price { get; set; }
         public BUser BUser { get; set; }
         public string Link { get; set; }
+        public Image Image { get; set; }
 
     }
 }

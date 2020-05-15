@@ -36,21 +36,22 @@ namespace FietsAPI.Controllers
         public async Task<ActionResult<String>> CreateToken([FromBody]LoginDTO model)
         {
             var user = await _userManager.FindByNameAsync(model.Email);
+            var bUser = _bUserRepository.GetByEmail(model.Email);
             if (user != null)
             {
                 var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
                 if (result.Succeeded)
                 {
                     string token = GetToken(user);
-                    return Created("", new { Token = token});
+                    return Created("", token);
                 }
             }
-            return BadRequest();
+            return BadRequest("dit is een test");
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult<String>> Register(registerDTO model)
+        public async Task<ActionResult<String>> Register([FromBody]registerDTO model)
         {
             IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
             BUser bUser = new BUser { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
@@ -62,6 +63,7 @@ namespace FietsAPI.Controllers
                 string token = GetToken(user);
                 return Created("", token);
             }
+            
             return BadRequest();
         }
 
@@ -79,6 +81,14 @@ namespace FietsAPI.Controllers
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("checkusername")]
+        public async Task<ActionResult<Boolean>> CheckAvailableUserName(string email)
+        {
+            var user = await _userManager.FindByNameAsync(email);
+            return user == null;
         }
 
     }

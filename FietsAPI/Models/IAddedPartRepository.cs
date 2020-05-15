@@ -12,6 +12,7 @@ namespace FietsAPI.Models
         public IEnumerable<AddedPart> GetAll();
         public IEnumerable<AddedPart> GetByBUserEmail(string email);
         public IEnumerable<AddedPart> GetByPartId(int id);
+        public AddedPart GetMostRecentByPartIdAndEmail(int id, string email);
         public AddedPart GetById(int id);
         public void AddAddedPart(AddedPart part);
         public void SaveChanges();

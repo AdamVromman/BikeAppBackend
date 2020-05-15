@@ -31,6 +31,7 @@ namespace FietsAPI.Data.Repositories
             return _AddedParts
                 .Include(a => a.BUser)
                 .Include(a => a.Part)
+                .Include(a => a.Image)
                 .ToList();
         }
 
@@ -40,6 +41,7 @@ namespace FietsAPI.Data.Repositories
                 .Where(a => a.BUser.Email.ToLower().Equals(email.ToLower()))
                 .Include(a => a.BUser)
                 .Include(a => a.Part)
+                .Include(a => a.Image)
                 .ToList();
         }
 
@@ -56,7 +58,13 @@ namespace FietsAPI.Data.Repositories
                 .Where(a => a.Part.Id == id)
                 .Include(a => a.BUser)
                 .Include(a => a.Part)
+                .Include(a => a.Image)
                 .ToList();
+        }
+
+        public AddedPart GetMostRecentByPartIdAndEmail(int id, string email)
+        {
+            return _AddedParts.FirstOrDefault(a => a.Part.Id == id && a.BUser.Email.Equals(email));
         }
 
         public void SaveChanges()

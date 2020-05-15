@@ -71,7 +71,7 @@ namespace FietsAPI.Data
                 };
                 Part achterTandWiel = new Part()
                 {
-                    Name = "Achter tandwiel",
+                    Name = "Achtertandwiel",
                     Description = "Het achterste tandwiel hangt vast aan het achterwiel en drijft via de ketting de fiets aan.",
                     Functionality = Functionality.Aandrijving,
                     IsOptional = false,
@@ -87,7 +87,7 @@ namespace FietsAPI.Data
                 };
                 Part BottomBracket = new Part 
                 { 
-                    Name = "Bottom Bracket", 
+                    Name = "Bottombracket", 
                     Description = "De Bottom Bracket is de motor van de Bike. Het Part zit tussen de twee pedalen en zorgt dat de pedalen goed draaien.", 
                     Functionality = Functionality.Aandrijving, 
                     IsOptional = false,

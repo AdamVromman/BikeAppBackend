@@ -7,6 +7,7 @@ namespace FietsAPI.Models.DTO
 {
     public class addedPartDTO
     {
+        public int id { get; set; }
         public string name { get; set; }
         public string brand { get; set; }
         public decimal price { get; set; }
