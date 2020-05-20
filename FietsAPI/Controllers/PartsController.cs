@@ -53,22 +53,28 @@ namespace FietsAPI.Controllers
         /// <param name="id">het Id van de Part</param>
         /// <returns>Eén Part</returns>
         [HttpGet("{id}")]
-        public ActionResult<Part> GetById(int id)
+        public ActionResult<PartDTO> GetById(int id)
         {
-            Part part = _partRepository.GetById(id);
-            if (part == null)
+            Part p = _partRepository.GetById(id);
+            if (p == null)
             {
                 return NotFound();
             }
-            return Ok(part);
+
+            PartDTO partDTO = new PartDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Functionality = p.Functionality.ToString(),
+                IsOptional = p.IsOptional,
+                DominantParts = p.DominantParts.Select(dp => dp.DominantPart.Name).ToList(),
+                DependantParts = p.DependantParts.Select(dp => dp.DependantPart.Name).ToList(),
+                BikeId = p.BikeParts.Select(b => b.BikeId).ToList()
+            };
+
+            return Ok(partDTO);
             
-        }
-
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost]
-        public void AddPart(string name, string? description, Functionality? functionality, bool? isOptional, int[] dependantPartsId)
-        {
-
         }
 
     }

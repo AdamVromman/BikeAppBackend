@@ -30,16 +30,30 @@ namespace FietsAPI.Data.Repositories
 
         public Bike GetById(int id)
         {
-            return _bikes.FirstOrDefault(b => b.Id == id);
+            return _bikes.Include(b => b.Parts)
+                .ThenInclude(b => b.Part.DominantParts)
+                .Include(b => b.Parts)
+                .ThenInclude(p => p.Part.DependantParts).FirstOrDefault(b => b.Id == id);
                 
         }
 
         public IEnumerable<Bike> GetByType(string type)
         {
             return _bikes.Where(b => b.Type.ToLower().Equals(type.ToLower()))
+                 .Include(b => b.Parts)
+                .ThenInclude(b => b.Part.DominantParts)
                 .Include(b => b.Parts)
+                .ThenInclude(p => p.Part.DependantParts)
                 .OrderBy(b => b.Name);
                 
+        }
+
+        public Bike GetByName(string name)
+        {
+            return _bikes.Include(b => b.Parts)
+                .ThenInclude(b => b.Part.DominantParts)
+                .Include(b => b.Parts)
+                .ThenInclude(p => p.Part.DependantParts).FirstOrDefault(b => b.Name.Equals(name));
         }
     }
 }

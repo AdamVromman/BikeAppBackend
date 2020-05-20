@@ -31,12 +31,12 @@ namespace FietsAPI.Data.Repositories
 
         public Image GetByAddedPartId(int id)
         {
-            return _images.FirstOrDefault(i => i.Id == id);
+            return _images.Include(i => i.Part).FirstOrDefault(i => i.Id == id);
         }
 
         public Image GetById(int id)
         {
-            return _images.FirstOrDefault(i => i.PartId == id);
+            return _images.Include(i => i.Part).FirstOrDefault(i => i.PartId == id);
         }
 
         public void saveChanges()

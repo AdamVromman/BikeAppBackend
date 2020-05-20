@@ -18,8 +18,8 @@ namespace FietsAPI.Data.Mappers
             builder.Property(b => b.Price).HasColumnType("decimal(38,2)");
             builder.Property(b => b.Brand).IsRequired(false);
 
-            builder.HasOne(b => b.Part);
-            builder.HasOne(b => b.BUser);
+            builder.HasOne(b => b.Part).WithMany();
+            builder.HasOne(b => b.BUser).WithMany();
             builder.HasOne(b => b.Image).WithOne(i => i.Part).HasForeignKey<Image>(b => b.PartId);
             
         }

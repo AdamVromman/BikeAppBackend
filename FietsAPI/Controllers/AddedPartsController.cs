@@ -101,8 +101,7 @@ namespace FietsAPI.Controllers
                 {
                     
                     ImageData = ms.ToArray(),
-                    Part = part,
-                    PartId = 1
+                    PartId = part.Id
 
                 };
                 _imageRepository.addImage(image);
@@ -114,12 +113,27 @@ namespace FietsAPI.Controllers
 
         }
 
-        [HttpGet("test/{id}")]
-        public Image GetAll(int id)
+        [HttpGet("getImage/{id}")]
+        public ActionResult<Image> GetImage(int id)
         {
             //Console.WriteLine(id);
-            Image image = _imageRepository.GetById(id);
-            return image;
+            try
+            {
+                Image image = _imageRepository.GetById(id);
+                ImageDTO imageDTO = new ImageDTO
+                {
+                    ImageData = image.ImageData,
+                    PartId = image.PartId
+                };
+                return Ok(imageDTO);
+            }
+            catch
+            {
+                return Ok(null);
+            }
+           
+
+            
         }
 
 

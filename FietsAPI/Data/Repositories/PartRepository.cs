@@ -44,8 +44,10 @@ namespace FietsAPI.Data.Repositories
         public Part GetById(int id)
         {
             return _Parts
-                .Include(p => p.DependantParts)
-                .Include(p => p.DominantParts)
+                .Include(p => p.DependantParts).ThenInclude(dp => dp.DominantPart)
+                .Include(p => p.DependantParts).ThenInclude(dp => dp.DependantPart)
+                .Include(p => p.DominantParts).ThenInclude(dp => dp.DominantPart)
+                .Include(p => p.DominantParts).ThenInclude(dp => dp.DependantPart)
                 .Include(p => p.BikeParts)
                 .FirstOrDefault(o => o.Id == id);
         }

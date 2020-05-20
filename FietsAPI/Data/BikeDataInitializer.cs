@@ -19,7 +19,7 @@ namespace FietsAPI.Data
 
         public async Task InitializeData()
         {
-            _applicationDbContext.Database.EnsureDeleted();
+            //_applicationDbContext.Database.EnsureDeleted();
             if (_applicationDbContext.Database.EnsureCreated())
             {
                 #region parts
@@ -491,50 +491,15 @@ namespace FietsAPI.Data
                 #endregion
 
                 #region users
-                BUser putin = new BUser { Email = "Vladimir.Putin@hogent.be", FirstName = "Vladimir", LastName = "Putin" };
+                BUser putin = new BUser { Email = "Eddie.Merckx@hogent.be", FirstName = "Eddie", LastName = "Merckx" };
                 _applicationDbContext.BUsers.Add(putin);
-                await CreateUser(putin.Email, "VladimirPutin1Password");
+                await CreateUser(putin.Email, "EddieMerckxPassword1");
                 _userManager.FindByNameAsync(putin.Email).Result.EmailConfirmed = true;
                 
-                BUser mao = new BUser { Email = "Mao.Zedong@hogent.be", FirstName = "Mao", LastName = "Zedong" };
+                BUser mao = new BUser { Email = "Tom.Boonen@hogent.be", FirstName = "Tom", LastName = "Boonen" };
                 _applicationDbContext.BUsers.Add(mao);
-                await CreateUser(mao.Email, "MaoZedong1Password");
+                await CreateUser(mao.Email, "TomBoonenPassword1");
                 _userManager.FindByNameAsync(mao.Email).Result.EmailConfirmed = true;
-
-                #endregion
-
-                #region AddedParts
-
-                AddedPart part1 = new AddedPart
-                {
-                    Name = "Eltin Moderate Pro Zadel",
-                    Brand = "Eltin",
-                    BUser = putin,
-                    Part = Zadel,
-                    Price = 14.50m
-                };
-
-                AddedPart part2 = new AddedPart
-                {
-                    Name = "Mighty crankset 165mm 48T",
-                    Brand = "Mighty",
-                    BUser = mao,
-                    Part = CrankSet,
-                    Price = 29.90m
-                };
-
-                AddedPart part3 = new AddedPart
-                {
-                    Name = "Open U.P.P.E.R gravel frame",
-                    Brand = "OPEN",
-                    BUser = mao,
-                    Part = Kader,
-                    Price = 4500.00m
-                    
-                };
-
-                _applicationDbContext.AddedParts.AddRange(new List<AddedPart> { part1, part2, part3 });
-
 
                 #endregion
 

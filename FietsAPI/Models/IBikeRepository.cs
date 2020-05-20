@@ -11,6 +11,7 @@ namespace FietsAPI.Models
         public IEnumerable<Bike> GetAll();
         public Bike GetById(int id);
         public IEnumerable<Bike> GetByType(string type);
+        public Bike GetByName(string name);
 
     }
 }

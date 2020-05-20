@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,6 +49,9 @@ namespace FietsAPI.Data.Repositories
         public AddedPart GetById(int id)
         {
             return _AddedParts
+                .Include(a => a.BUser)
+                .Include(a => a.Part)
+                .Include(a => a.Image)
                 .FirstOrDefault(a => a.Id == id);
                 
         }
@@ -64,7 +68,10 @@ namespace FietsAPI.Data.Repositories
 
         public AddedPart GetMostRecentByPartIdAndEmail(int id, string email)
         {
-            return _AddedParts.FirstOrDefault(a => a.Part.Id == id && a.BUser.Email.Equals(email));
+            ICollection<AddedPart> parts = _AddedParts.Include(a => a.BUser)
+                .Include(a => a.Part)
+                .Include(a => a.Image).Where(a => a.Part.Id == id && a.BUser.Email.Equals(email)).ToList();
+            return parts.ElementAt(parts.Count - 1);
         }
 
         public void SaveChanges()

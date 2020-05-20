@@ -21,7 +21,7 @@ namespace FietsAPI.Controllers
         public BikesController(IBikeRepository bikeRepository)
         {
             _bikeRepository = bikeRepository;
-           
+
         }
 
         [HttpGet]
@@ -47,13 +47,51 @@ namespace FietsAPI.Controllers
                             DependantParts = p.Part.DependantParts.Select(dp => dp.DependantPart.Name).ToList(),
                             BikeId = p.Part.BikeParts.Select(b => b.BikeId).ToList()
                         };
-                       
+
                         return part;
                     }).ToList()
                 };
-                
-                
+
+
             }).ToList();
+        }
+
+        [HttpGet("{name}")]
+        public ActionResult<BikeDTO> getBikeByName(string name)
+        {
+            try
+            {
+                Bike bike = _bikeRepository.GetByName(name);
+                BikeDTO bikeDTO = new BikeDTO
+                {
+                    Id = bike.Id,
+                    Name = bike.Name,
+                    Parts = bike.Parts.Select(p =>
+                    {
+                        PartDTO part = new PartDTO
+                        {
+                            Id = p.Part.Id,
+                            Name = p.Part.Name,
+                            Description = p.Part.Description,
+                            Functionality = p.Part.Functionality.ToString(),
+                            IsOptional = p.Part.IsOptional,
+                            DominantParts = p.Part.DominantParts.Select(dp => dp.DominantPart.Name).ToList(),
+                            DependantParts = p.Part.DependantParts.Select(dp => dp.DependantPart.Name).ToList(),
+                            BikeId = p.Part.BikeParts.Select(b => b.BikeId).ToList()
+                        };
+
+                        return part;
+                    }).ToList(),
+                    Type = bike.Type
+
+                };
+                return Ok(bikeDTO);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e);
+            }
+           
         }
 
     }
