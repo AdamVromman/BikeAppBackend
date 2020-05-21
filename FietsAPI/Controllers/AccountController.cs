@@ -45,8 +45,12 @@ namespace FietsAPI.Controllers
                     string token = GetToken(user);
                     return Created("", token);
                 }
+                else
+                {
+                    return BadRequest("Email/Password combination wrong");
+                }
             }
-            return BadRequest("dit is een test");
+            return BadRequest("Not a know email");
         }
 
         [AllowAnonymous]
@@ -64,7 +68,7 @@ namespace FietsAPI.Controllers
                 return Created("", token);
             }
             
-            return BadRequest();
+            return BadRequest("Something went wrong");
         }
 
         private String GetToken(IdentityUser user)

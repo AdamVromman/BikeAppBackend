@@ -114,6 +114,7 @@ namespace FietsAPI.Controllers
         }
 
         [HttpGet("getImage/{id}")]
+        [AllowAnonymous]
         public ActionResult<Image> GetImage(int id)
         {
             //Console.WriteLine(id);
@@ -134,6 +135,36 @@ namespace FietsAPI.Controllers
            
 
             
+        }
+
+        [HttpGet("getByPart/{id}")]
+        [AllowAnonymous]
+        public IEnumerable<addedPartDTO> getByPartId(int id)
+        {
+            try
+            {
+                return _addedPartRepository.GetByPartId(id).Select(ap =>
+                {
+                    addedPartDTO added = new addedPartDTO
+                    {
+                        id = ap.Id,
+                        name = ap.Name,
+                        brand = ap.Brand,
+                        price = ap.Price,
+                        email = ap.BUser.Email,
+                        link = ap.Link,
+                        partId = ap.Part.Id
+
+                    };
+                    return added;
+                }
+
+                    );
+            }
+            catch
+            {
+                return null;
+            }
         }
 
 

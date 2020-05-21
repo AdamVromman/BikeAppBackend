@@ -63,6 +63,8 @@ namespace FietsAPI.Data.Repositories
                 .Include(a => a.BUser)
                 .Include(a => a.Part)
                 .Include(a => a.Image)
+                .OrderBy(a => a.Id)
+                .Reverse()
                 .ToList();
         }
 
