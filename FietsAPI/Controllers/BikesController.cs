@@ -23,7 +23,10 @@ namespace FietsAPI.Controllers
             _bikeRepository = bikeRepository;
 
         }
-
+        /// <summary>
+        /// geeft alle Bikes terug
+        /// </summary>
+        /// <returns>all Bikes</returns>
         [HttpGet]
         public IEnumerable<BikeDTO> GetBikes()
         {
@@ -49,15 +52,19 @@ namespace FietsAPI.Controllers
                         };
 
                         return part;
-                    }).ToList()
+                    }).OrderBy(p => p.Name).ToList()
                 };
 
 
             }).ToList();
         }
-
+        /// <summary>
+        /// Geeft een Bike terug, gefilterd op naam
+        /// </summary>
+        /// <param name="name">De naam van de Bike</param>
+        /// <returns>1 Bike</returns>
         [HttpGet("{name}")]
-        public ActionResult<BikeDTO> getBikeByName(string name)
+        public ActionResult<BikeDTO> GetBikeByName(string name)
         {
             try
             {
@@ -81,7 +88,7 @@ namespace FietsAPI.Controllers
                         };
 
                         return part;
-                    }).ToList(),
+                    }).OrderBy(p => p.Name).ToList(),
                     Type = bike.Type
 
                 };

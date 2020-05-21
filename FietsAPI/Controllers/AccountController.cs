@@ -30,7 +30,11 @@ namespace FietsAPI.Controllers
             _bUserRepository = bUserRepository;
             _configuration = configuration;
         }
-
+        /// <summary>
+        /// token maken voor bestaande gebruiker
+        /// </summary>
+        /// <param name="model">LoginDTO</param>
+        /// <returns>token</returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<String>> CreateToken([FromBody]LoginDTO model)
@@ -52,7 +56,11 @@ namespace FietsAPI.Controllers
             }
             return BadRequest("Not a know email");
         }
-
+        /// <summary>
+        /// nieuwe gebruiker aanmaken
+        /// </summary>
+        /// <param name="model">registerDTO</param>
+        /// <returns>specifieke errormessage</returns>
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<String>> Register([FromBody]registerDTO model)
@@ -86,7 +94,11 @@ namespace FietsAPI.Controllers
                 signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
+        /// <summary>
+        /// checkt de username als een gebruiker een nieuwe account wil maken
+        /// </summary>
+        /// <param name="email">te checken email</param>
+        /// <returns>Boolean</returns>
         [AllowAnonymous]
         [HttpGet("checkusername")]
         public async Task<ActionResult<Boolean>> CheckAvailableUserName(string email)

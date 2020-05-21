@@ -20,7 +20,7 @@ namespace FietsAPI.Controllers
         private readonly IPartRepository _partRepository;
         private readonly IBUserRepository _bUserRepository;
         private readonly IImageRepository _imageRepository;
-
+        
         public AddedPartsController(IAddedPartRepository addedPartRepository, IPartRepository partRepository, IBUserRepository bUserRepository, IImageRepository imageRepository)
         {
             _addedPartRepository = addedPartRepository;
@@ -28,7 +28,10 @@ namespace FietsAPI.Controllers
             _bUserRepository = bUserRepository;
             _imageRepository = imageRepository;
         }
-
+        /// <summary>
+        /// geeft al de AddedParts terug
+        /// </summary>
+        /// <returns>all AddedParts</returns>
         [HttpGet]
         public IEnumerable<addedPartDTO> GetAddedParts()
         {
@@ -48,7 +51,11 @@ namespace FietsAPI.Controllers
             }
             );
         }
-
+        /// <summary>
+        /// voegt een addedPart toe, moet geauthorizeerd zijn daarvoor
+        /// </summary>
+        /// <param name="addedPartDTO">een AddedPartDTO</param>
+        /// <returns>specifiek errorbericht</returns>
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public ActionResult<string> AddAddedPart([FromBody]addedPartDTO addedPartDTO)
@@ -86,8 +93,14 @@ namespace FietsAPI.Controllers
 
         }
 
+        /// <summary>
+        /// Voegt een afbeelding toe aan een bestaande AddedPart. Wordt in de frontend automatisch gecalled na AddAddedPart. Kon niet op hetzelfde moment gebeuren omdat die Id pas gegenereerd wordt bij het opslaan in de databank.
+        /// </summary>
+        /// <param name="id">id van de part</param>
+        /// <returns></returns>
         [HttpPost("addImage/{id}")]
         [AllowAnonymous]
+        
         public ActionResult<String> AddImage(int id)
         {
             IFormFile files = Request.Form.Files[0];
@@ -112,7 +125,11 @@ namespace FietsAPI.Controllers
             return BadRequest();
 
         }
-
+        /// <summary>
+        /// één afbeelding ophalen, via id van AddedPart
+        /// </summary>
+        /// <param name="id">id van AddedPart</param>
+        /// <returns>één image</returns>
         [HttpGet("getImage/{id}")]
         [AllowAnonymous]
         public ActionResult<Image> GetImage(int id)
@@ -136,7 +153,11 @@ namespace FietsAPI.Controllers
 
             
         }
-
+        /// <summary>
+        /// geeft lijst van AddedParts terug, gefilterd op id van Part
+        /// </summary>
+        /// <param name="id">id van Part</param>
+        /// <returns>Lijst van AdddedParts</returns>
         [HttpGet("getByPart/{id}")]
         [AllowAnonymous]
         public IEnumerable<addedPartDTO> getByPartId(int id)
